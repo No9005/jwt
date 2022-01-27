@@ -33,6 +33,6 @@ if __name__ == "__main__":
         package_dir={
             "jsonWebToken":jwtPath
         },
-        packages=["jsonWebToken", "jsonWebToken.helpers"],
+        packages=["jsonWebToken", "jsonWebToken.helpers", "jsonWebToken.algorithmn"],
         install_requires=['Authlib']
     )
