@@ -252,5 +252,8 @@ Keep in mind that you have to select the correct signing algorithmn. These are:
 
 ## <a name="references"></a> 5. references
 [1] Python authlib: https://docs.authlib.org/en/latest/ <br>
-[2] JWT intro: https://jwt.io/introduction
+[2] JWT intro: https://jwt.io/introduction <br>
 [3] Generating public/private rsa keys: https://developers.yubico.com/PIV/Guides/Generating_keys_using_OpenSSL.html
+
+<br>
+
