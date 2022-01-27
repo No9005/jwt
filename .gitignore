@@ -1,0 +1,13 @@
+.env
+.venv
+
+__pycache__
+
+jwt.egg
+jwt.egg-info
+Pipfile
+Pipfile.lock
+.ipynb_checkpoints
+.pypirc
+dist
+pyproject.toml
