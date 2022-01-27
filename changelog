@@ -1,6 +1,7 @@
+v.2.0.0: Renaming namespace from 'jwt' to 'jsonWebToken'.
+
+----- old versions -----------------------------------------
 v.1.0.0: Project setup, functions & unittests. See changelog.
     - general: Created the project, added all necessary data,
                build functions and run some unittests.
                Looks good.
-
------ old versions -----------------------------------------

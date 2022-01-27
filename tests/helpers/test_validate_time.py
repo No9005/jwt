@@ -8,7 +8,7 @@ import unittest
 import datetime
 from time import sleep
 
-from jwt.helpers import validate_time
+from jsonWebToken.helpers import validate_time
 
 #region 'create cls fake class'
 class CLS:

@@ -8,7 +8,7 @@ import unittest
 
 from time import sleep
 
-from jwt import with_rsa
+from jsonWebToken import with_rsa
 from tests.key import rsa
 
 #class

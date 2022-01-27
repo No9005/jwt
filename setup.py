@@ -6,10 +6,10 @@ import sys
 if __name__ == "__main__":
     
     # package paths
-    jwtPath = util.convert_path("jwt")
+    jwtPath = util.convert_path("jsonWebToken")
 
     # get version file
-    versionPath = Path().cwd() / "jwt/version.py"
+    versionPath = Path().cwd() / "jsonWebToken/version.py"
 
     main_ns = {}
 
@@ -21,7 +21,7 @@ if __name__ == "__main__":
 
     # running setup
     setup(
-        name="jwt",
+        name="jsonWebToken",
         version=main_ns['__version__'],
         description="Collection of functions to create JWT (signed)",
         long_description=longDescription,
@@ -31,8 +31,8 @@ if __name__ == "__main__":
         url="https://github.com/No9005/jwt",
         license="MIT",
         package_dir={
-            "jwt":jwtPath
+            "jsonWebToken":jwtPath
         },
-        packages=["jwt"],
+        packages=["jsonWebToken", "jsonWebToken.helpers"],
         install_requires=['Authlib']
     )

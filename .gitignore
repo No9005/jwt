@@ -5,6 +5,11 @@ __pycache__
 
 jwt.egg
 jwt.egg-info
+*.egg-info
+
+/build
+/dist
+
 Pipfile
 Pipfile.lock
 .ipynb_checkpoints

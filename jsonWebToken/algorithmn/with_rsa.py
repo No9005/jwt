@@ -9,7 +9,7 @@ import datetime
 
 from authlib.jose import JsonWebToken
 
-from jwt.helpers.validate_time import validate_expiration
+from jsonWebToken.helpers.validate_time import validate_expiration
 
 #region 'functions' ----------------------------
 def create(payload:dict, private_key:str, expiration:int = 600) -> str:

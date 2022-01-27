@@ -8,7 +8,7 @@ import unittest
 
 from time import sleep
 
-from jwt import with_secret
+from jsonWebToken import with_secret
 #class
 class TestWithSecret(unittest.TestCase):
     """Tests the functions from validate_time.py

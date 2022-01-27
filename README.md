@@ -1,4 +1,4 @@
-# jwt
+# jsonWebToken
 This package wraps the 'authlib' jwt class. <br>
 For indepth information about the package you should check out the developers [homepage](https://docs.authlib.org/en/latest/).
 
@@ -81,7 +81,7 @@ Import the method with:
 <br>
 
 ```python
-from jwt import with_rsa
+from jsonWebToken import with_rsa
 ```
 
 <br>
@@ -171,7 +171,7 @@ To use the functions you have to import the `with_secret` module:
 <br>
 
 ```python
-from jwt import with_secret
+from jsonWebToken import with_secret
 ```
 
 <br>

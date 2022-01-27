@@ -10,7 +10,7 @@ import json
 
 from authlib.jose import JsonWebSignature
 
-from jwt.helpers.validate_time import validate_expiration
+from jsonWebToken.helpers.validate_time import validate_expiration
 
 #region 'functions' ----------------------------
 def create(payload:dict, secret:str, expiration:int = 600) -> str:
