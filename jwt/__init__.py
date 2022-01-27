@@ -4,4 +4,5 @@ Json web tokens
 
 """
 
-from jwt.algorithmn import with_rsa, with_secret
+import jwt.algorithmn.with_rsa as with_rsa
+import jwt.algorithmn.with_secret as with_secret
