@@ -5,7 +5,7 @@ of a web token
 """
 
 # imports
-import datetime
+import time
 
 #functions
 def validate_expiration(token_content):
@@ -27,16 +27,10 @@ def validate_expiration(token_content):
     # expiration check
     try:
         # check if we need to validate expiration
-        if token_content.header['exp'] is not None and token_content.header['exp'] != "None":
-
-            # calculate expiration
-            future = datetime.datetime.strptime(token_content.header['timestamp'], "%Y-%m-%d-%H-%M-%S-%f")
-
-            # add exp time
-            expiration = future + datetime.timedelta(seconds=int(token_content.header['exp']))
+        if token_content['exp'] is not None and token_content['exp'] != "None":
 
             # valid?
-            if datetime.datetime.utcnow() > expiration: return {'success':False, 'error':"Token expired.", 'payload':{}}
+            if int(time.time()) > int(token_content['exp']): return {'success':False, 'error':"Token expired.", 'payload':{}}
 
     except Exception as e: 
         

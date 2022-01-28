@@ -5,7 +5,7 @@ jwt with an public & private rsa key (RS256).
 """
 
 # import 
-import datetime
+import time
 
 from authlib.jose import JsonWebToken
 
@@ -36,13 +36,14 @@ def create(payload:dict, private_key:str, expiration:int = 600) -> str:
         
     """
 
+    # get current time in utc
+    now = int(time.time())
+
     # parse expiration
-    exp = expiration
+    exp = None
     if expiration is not None:
         if expiration <= 0: exp=None
-
-    # get current time in utc
-    now = datetime.datetime.utcnow().strftime("%Y-%m-%d-%H-%M-%S-%f")
+        else: exp = now + expiration
 
     # create jwt instance
     jwt = JsonWebToken(algorithms="RS256")
@@ -50,9 +51,13 @@ def create(payload:dict, private_key:str, expiration:int = 600) -> str:
     # build the token
     token = jwt.encode(
         {
-            'alg':"RS256", 'type':"JWT", 'exp':exp, 'timestamp':now
+            'alg':"RS256", 'type':"JWT"
         },
-        payload,
+        {
+            'exp':exp,
+            'iat':now,
+            **payload
+        },
         private_key
     )
 
@@ -82,6 +87,9 @@ def decode(token:str, public_key:str) -> dict:
     # decode
     try: content = jwt.decode(token, public_key)
     except Exception as e: return {'success':False, 'error':"{t}: {m}".format(t=str(type(e).__name__), m=str(e)), 'payload':{}}
+
+    # alg = RS256?
+    if not content.header['alg'] == "RS256": return {'success':False, 'error':"Wrong 'alg'."}
 
     # validate timestamp
     valid = validate_expiration(content)

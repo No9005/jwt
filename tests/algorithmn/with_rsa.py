@@ -27,7 +27,8 @@ class TestWithRsa(unittest.TestCase):
     """
 
     def setUp(self) -> None:
-        return super().setUp()
+
+        self.maxDiff = None
 
     def tearDown(self) -> None:
         return super().tearDown()
@@ -59,7 +60,10 @@ class TestWithRsa(unittest.TestCase):
         )
 
         self.assertTrue(result['success'])
-        self.assertEqual(result['payload'], payload)
+
+        pld = result['payload']
+        del pld['exp']
+        self.assertEqual(pld, payload)
         
         #endregion
 
@@ -70,7 +74,7 @@ class TestWithRsa(unittest.TestCase):
             expiration=1
         )
 
-        sleep(1)
+        sleep(2)
 
         result = with_rsa.decode(
             token,

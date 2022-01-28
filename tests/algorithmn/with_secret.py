@@ -57,7 +57,9 @@ class TestWithSecret(unittest.TestCase):
         )
         
         self.assertTrue(result['success'])
-        self.assertEqual(result['payload'], payload)
+        pld = result['payload']
+        del pld['exp']
+        self.assertEqual(pld, payload)
         
         #endregion
 
@@ -68,7 +70,7 @@ class TestWithSecret(unittest.TestCase):
             expiration=1
         )
 
-        sleep(1)
+        sleep(2)
 
         result = with_secret.decode(
             token,
@@ -87,7 +89,7 @@ class TestWithSecret(unittest.TestCase):
             expiration=None
         )
 
-        sleep(1)
+        sleep(2)
 
         result = with_secret.decode(
             token,

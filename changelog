@@ -1,6 +1,8 @@
-v.2.0.0: Renaming namespace from 'jwt' to 'jsonWebToken'.
+v.2.1.0: Changed 'exp' evaluation.
 
 ----- old versions -----------------------------------------
+v.2.0.0: Renaming namespace from 'jwt' to 'jsonWebToken'.
+
 v.1.0.0: Project setup, functions & unittests. See changelog.
     - general: Created the project, added all necessary data,
                build functions and run some unittests.

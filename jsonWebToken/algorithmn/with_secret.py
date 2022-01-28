@@ -5,7 +5,7 @@ decodes a jws created with a secret (HS256).
 """
 
 # import 
-import datetime
+import time
 import json
 
 from authlib.jose import JsonWebSignature
@@ -38,16 +38,17 @@ def create(payload:dict, secret:str, expiration:int = 600) -> str:
         
     """
 
+    # get current time in utc
+    now = int(time.time())
+
     # parse expiration
-    exp = expiration
+    exp = None
     if expiration is not None:
         if expiration <= 0: exp=None
+        else: exp = now + expiration
 
     # encode secret
     sec = secret.encode('utf-8')
-
-    # get current time in utc
-    now = datetime.datetime.utcnow().strftime("%Y-%m-%d-%H-%M-%S-%f")
 
     # create jwt instance
     jwt = JsonWebSignature(algorithms="HS256")
@@ -55,9 +56,13 @@ def create(payload:dict, secret:str, expiration:int = 600) -> str:
     # build the token
     token = jwt.serialize_compact(
         {
-            'alg':"HS256", 'type':"JWT", 'exp':exp, 'timestamp':now
+            'alg':"HS256", 'type':"JWT"
         },
-        json.dumps(payload),
+        json.dumps({
+            'exp':exp,
+            'iat':now,
+            **payload
+        }),
         sec
     )
 
@@ -92,12 +97,15 @@ def decode(token:str, secret:str) -> dict:
     try: content = jwt.deserialize_compact(token, secretByte)
     except Exception as e: return {'success':False, 'error':"{t}: {m}".format(t=str(type(e).__name__), m=str(e)), 'payload':{}}
 
-    # validate timestamp
-    valid = validate_expiration(content)
-    if not valid['success']: return valid
+    # alg == HS256?
+    if not content.header['alg'] == "HS256": return {'success':False, 'error':"Wrong 'alg'."}
 
     # get payload
     payload = json.loads(content.payload)
+
+    # validate timestamp
+    valid = validate_expiration(payload)
+    if not valid['success']: return valid
 
     # all done?
     return {
